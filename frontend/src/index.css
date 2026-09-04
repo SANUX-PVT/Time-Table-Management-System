@@ -86,16 +86,17 @@ a:hover { text-decoration: underline; }
 }
 
 .sidebar .brand {
-  padding: 10px 20px 24px;
+  padding: 10px 20px;
   color: #fff;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   margin-bottom: 12px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .brand .brand-logo {
-  height: 48px;
+  height: 26px;
   width: auto;
   max-width: 100%;
   object-fit: contain;
