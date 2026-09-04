@@ -39,6 +39,18 @@ import type {
 
 export const api = axios.create({ baseURL: 'http://localhost:3000/api' });
 
+// On the GitHub Pages static deploy there's no backend to call — VITE_USE_MOCK
+// (set only by the Pages build in .github/workflows/deploy-pages.yml) swaps in
+// an in-browser mock that replicates the real API so the demo is interactive.
+// main.tsx awaits this before rendering, so no component's first fetch races
+// the swap and falls through to a real (failing) network call.
+export async function setupApiAdapter() {
+  if (import.meta.env.VITE_USE_MOCK === 'true') {
+    const { mockAdapter } = await import('../mock/adapter');
+    api.defaults.adapter = mockAdapter;
+  }
+}
+
 export const Config = {
   get: () => api.get<SchoolConfig>('/config').then((r) => r.data),
   update: (body: Partial<SchoolConfig>) => api.put<SchoolConfig>('/config', body).then((r) => r.data),
