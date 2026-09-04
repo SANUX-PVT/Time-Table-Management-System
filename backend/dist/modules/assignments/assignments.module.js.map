@@ -1,1 +1,0 @@
-{"version":3,"file":"assignments.module.js","sourceRoot":"","sources":["../../../src/modules/assignments/assignments.module.ts"],"names":[],"mappings":";;;;;;AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,gBAAgB,CAAC;AACxC,OAAO,EAAE,qBAAqB,EAAE,MAAM,6BAA6B,CAAC;AAG7D,IAAM,iBAAiB,GAAvB,MAAM,iBAAiB;CAAG,CAAA;AAApB,iBAAiB;IAD7B,MAAM,CAAC,EAAE,WAAW,EAAE,CAAC,qBAAqB,CAAC,EAAE,CAAC;GACpC,iBAAiB,CAAG"}

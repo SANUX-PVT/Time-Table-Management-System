@@ -32,7 +32,7 @@ export default function App() {
     <AuthProvider>
       <PermissionsProvider>
         <RefDataProvider>
-          <BrowserRouter>
+          <BrowserRouter basename={import.meta.env.BASE_URL}>
             <Routes>
               <Route element={<Layout />}>
                 <Route path="/" element={<DashboardPage />} />

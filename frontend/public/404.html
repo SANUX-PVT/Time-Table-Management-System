@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>eArrow TTMS</title>
+    <script type="text/javascript">
+      // Single Page Apps for GitHub Pages
+      // https://github.com/rafgraph/spa-github-pages
+      // GitHub Pages has no server-side rewrites, so a direct load or refresh on
+      // any route other than "/" 404s. This re-encodes the path into a query
+      // string and redirects to index.html, which decodes it back before React
+      // Router mounts (see the matching script in index.html).
+      var pathSegmentsToKeep = 1; // keep the /<repo-name>/ segment
+
+      var l = window.location;
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1 + pathSegmentsToKeep).split('/').join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>

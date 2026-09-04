@@ -32,7 +32,7 @@ export function PermissionsProvider({ children }: { children: ReactNode }) {
       setPermissions(d.permissions);
       setLabels(d.labels);
       setLoading(false);
-    });
+    }).catch(() => setLoading(false));
   }, [tick]);
 
   const hasPermission = (key: PermissionKey) => {

@@ -96,9 +96,21 @@ function initials(name: string) {
 }
 
 export default function Layout() {
-  const { users, currentUser, setCurrentUser, loading } = useAuth();
+  const { users, currentUser, setCurrentUser, loading, backendUnreachable } = useAuth();
   const { hasPermission, loading: permsLoading } = usePermissions();
   const location = useLocation();
+
+  if (backendUnreachable) {
+    return (
+      <div className="empty-state" style={{ maxWidth: 480, margin: '80px auto', textAlign: 'center' }}>
+        <p style={{ fontWeight: 700, fontSize: 15, color: 'var(--text)' }}>This is a static front-end preview.</p>
+        <p>
+          It couldn't reach a live backend API, so there's no data to show. Clone the repository and run both the
+          backend and frontend locally to use the full app.
+        </p>
+      </div>
+    );
+  }
 
   if (loading || permsLoading || !currentUser) {
     return <div className="empty-state">Loading…</div>;

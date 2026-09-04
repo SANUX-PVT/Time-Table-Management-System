@@ -55,7 +55,7 @@ export function RefDataProvider({ children }: { children: ReactNode }) {
       setTeachers(t);
       setTimeSlots(ts);
       setLoading(false);
-    });
+    }).catch(() => setLoading(false));
   }, [tick]);
 
   const gradeName = (id?: string) => grades.find((g) => g.id === id)?.name ?? '—';

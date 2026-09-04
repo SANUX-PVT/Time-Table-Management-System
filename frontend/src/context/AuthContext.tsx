@@ -7,23 +7,30 @@ interface AuthCtx {
   currentUser: User | null;
   setCurrentUser: (u: User) => void;
   loading: boolean;
+  backendUnreachable: boolean;
 }
 
-const Ctx = createContext<AuthCtx>({ users: [], currentUser: null, setCurrentUser: () => {}, loading: true });
+const Ctx = createContext<AuthCtx>({ users: [], currentUser: null, setCurrentUser: () => {}, loading: true, backendUnreachable: false });
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [users, setUsers] = useState<User[]>([]);
   const [currentUser, setCurrentUserState] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [backendUnreachable, setBackendUnreachable] = useState(false);
 
   useEffect(() => {
-    Users.list().then((list) => {
-      setUsers(list);
-      const savedId = localStorage.getItem('currentUserId');
-      const found = list.find((u) => u.id === savedId);
-      setCurrentUserState(found ?? list[0] ?? null);
-      setLoading(false);
-    });
+    Users.list()
+      .then((list) => {
+        setUsers(list);
+        const savedId = localStorage.getItem('currentUserId');
+        const found = list.find((u) => u.id === savedId);
+        setCurrentUserState(found ?? list[0] ?? null);
+        setLoading(false);
+      })
+      .catch(() => {
+        setBackendUnreachable(true);
+        setLoading(false);
+      });
   }, []);
 
   const setCurrentUser = (u: User) => {
@@ -32,7 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <Ctx.Provider value={{ users, currentUser, setCurrentUser, loading }}>
+    <Ctx.Provider value={{ users, currentUser, setCurrentUser, loading, backendUnreachable }}>
       {children}
     </Ctx.Provider>
   );
